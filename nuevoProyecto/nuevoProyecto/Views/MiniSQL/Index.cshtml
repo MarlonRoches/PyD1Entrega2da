@@ -9,8 +9,6 @@
         <th>
             @using (Html.BeginForm("Index", "MiniSQL", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                <input type="text" name="nodo" />
-                <br />
                 <input type="file" name="postedFile" />
                 <input type="submit" value="Mostrar archivo" />
             }

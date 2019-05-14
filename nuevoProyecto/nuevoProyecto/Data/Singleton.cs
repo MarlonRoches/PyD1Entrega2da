@@ -258,7 +258,6 @@ namespace nuevoProyecto.Data
         }
 
         #endregion
-
         public void Input(string captura)
         {
            //listo
@@ -390,7 +389,6 @@ namespace nuevoProyecto.Data
                 break;
             }
         }
-        
         #region SelectMetodos
         public void Star(string tabla) //* LisTO
         {
@@ -423,9 +421,6 @@ namespace nuevoProyecto.Data
             SelectLista= FiltrarCampos(tabla, DatosEnvia);
 
         }
-
-
-
         public void StarWhere(string tabla, string variables, string Valor)//*Where
         {
 
@@ -440,8 +435,6 @@ namespace nuevoProyecto.Data
                 }
             }
         }
-
-
         public void DataWhere(string tabla, string variables , string Valor)//campos*    recibe
         {
             int contador = 0;
@@ -479,12 +472,6 @@ namespace nuevoProyecto.Data
 
             SelectLista = aux;
         }
-
-
-
-
-
-
         public List<Global> FiltrarCampos(string Tabla, string [] Datos)
         {
            
@@ -573,6 +560,5 @@ namespace nuevoProyecto.Data
             return false;
         }
         #endregion
-
     }
 }
