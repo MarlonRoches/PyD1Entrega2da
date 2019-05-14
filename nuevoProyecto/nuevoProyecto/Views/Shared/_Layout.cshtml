@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("SQL Marlon AND Santiago", "Index", "Index", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Trabajar Con Diccionario Predeterminado", "Reservada")</li>
+                    <li>@Html.ActionLink("Cambiar Palabras Reservadas", "CambiarPalabras")</li>
+                  <li>  @Html.ActionLink("TreeView", "TreeView") </li>
+                   <li> @Html.ActionLink("Ver Select", "Select") </li>
+                   <li>@Html.ActionLink("Regresar a consola", "Consola")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Estructuras I - @DateTime.Now.Hour : @DateTime.Now.Minute </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

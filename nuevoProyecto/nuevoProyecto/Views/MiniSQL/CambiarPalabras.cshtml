@@ -1,0 +1,90 @@
+﻿@model nuevoProyecto.Models.Diccionario
+
+@{
+    ViewBag.Title = "CambiarPalabras";
+}
+
+<h2>CambiarPalabras</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Diccionario</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Select, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Select, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Delete, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Delete, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Where, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Where, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateTable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreateTable, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DropTable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DropTable, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InsertInto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.InsertInto, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Go, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Go, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

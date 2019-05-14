@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        <th>
+            @using (Html.BeginForm("Index", "MiniSQL", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="text" name="nodo" />
+                <br />
+                <input type="file" name="postedFile" />
+                <input type="submit" value="Mostrar archivo" />
+            }
+        </th>
+    </tr>
+</table>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<nuevoProyecto.Models.Global>
+
+@{
+    ViewBag.Title = "DataGrid";
+}
+
+<h2>DataGrid</h2>
+
+<table class="table">
+    <tr>
+
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Int1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Int2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Int3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VarChar1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VarChar2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VarChar3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DT1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DT2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DT3)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Int1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Int2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Int3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VarChar1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VarChar2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VarChar3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DT1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DT2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DT3)
+        </td>
+
+    </tr>
+}
+
+</table>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<nuevoProyecto.Models.Global>
+
+@{
+    ViewBag.Title = "VerSelect";
+}
+
+<h2>VerSelect</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Int1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Int2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Int3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VarChar1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VarChar2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VarChar3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DT1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DT2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DT3)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @if (item.Int1 != "")
+            {
+                @Html.DisplayFor(modelItem => item.Int1)
+            }
+        </td>
+        <td>
+            @if (item.Int2 != "")
+            {
+                @Html.DisplayFor(modelItem => item.Int2)
+            }
+        </td>
+        <td>
+            @if (item.Int3 != "")
+            {
+                @Html.DisplayFor(modelItem => item.Int3)
+            }
+        </td>
+        <td>
+            @if (item.VarChar1 != "")
+            {
+                @Html.DisplayFor(modelItem => item.VarChar1)
+            }
+        </td>
+        <td>
+            @if (item.VarChar2 != "")
+            {
+                @Html.DisplayFor(modelItem => item.VarChar2)
+            }
+        </td>
+        <td>
+            @if (item.VarChar3 !=  "")
+            {
+                @Html.DisplayFor(modelItem => item.VarChar3)
+            }
+        </td>
+        <td>
+            @if (item.DT1 != "")
+            {
+                @Html.DisplayFor(modelItem => item.DT1)
+            }
+        </td>
+        <td>
+            @if (item.DT1 != "")
+            {
+                @Html.DisplayFor(modelItem => item.DT1)
+            }
+        </td>
+        <td>
+            @if (item.DT1 != "")
+            {
+                @Html.DisplayFor(modelItem => item.DT1)
+            }
+        </td>
+        <td>
+            @Html.ActionLink("ver Capos Correspondientes (PENDIENTE SANTIAGO)", "", new { id=item.Id }) 
+        </td>
+    </tr>
+}
+
+</table>
