@@ -46,7 +46,17 @@ namespace nuevoProyecto.Data
         #endregion
 
         #region Listo
+        #region botar_Todo
+        public void botarT(string llave)
+        {
+            var Objeto = DiBPlus[llave];
 
+            if (DiBPlus.ContainsKey(llave))
+            {
+                Objeto.RemoveAt(0);
+            }
+        }
+        #endregion
         public void LlenarPalabrasReservadas(string operacion)
         {
             StreamReader File = new StreamReader(operacion);
@@ -381,11 +391,22 @@ namespace nuevoProyecto.Data
                 }// Select PENDIENTE
                 if (Concatenada == PalabrasCustom[2])
                 {
+                    string llave = Arreglo[2];
+                    if (DiBPlus.ContainsKey(llave))
+                    {
+                        botarT(llave);
 
+                    }
+                    //if (DiBPlus.ContainsKey(llave) && Arreglo[3] == PalabrasCustom[3])
+                    //{
+                    //    //Global Elemento = Arreglo[4];
+                    //    //DiBPlus.FirstOrDefault(t => t.Key == llave).Value.RemoveAll("");
+
+                    //}
                     // Delete_From(arreglo[2], int.Parse(arreglo[arreglo.Length - 2]));
 
                 }//Delete From <Tabla> Where Id//Aplicar delete del arbol PENDIENTE
-              
+
                 break;
             }
         }
