@@ -533,7 +533,8 @@ namespace nuevoProyecto.Data
                     }
 
                 }
-                listasimple.Add(ObjetoDinamico);
+                    ObjetoDinamico.Tabla = NodoActual.Tabla;
+                    listasimple.Add(ObjetoDinamico);
 
                 }
 

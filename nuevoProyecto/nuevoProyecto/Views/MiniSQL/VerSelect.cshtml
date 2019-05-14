@@ -11,34 +11,65 @@
 </p>
 <table class="table">
     <tr>
+        @foreach (var item in Model)
+        {
         <th>
-            @Html.DisplayNameFor(model => model.Int1)
+            @if (item.Int1 != "")
+            {
+                @Html.DisplayNameFor(model => model.Int1)
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Int2)
+            @if (item.Int2 != "")
+            {
+                @Html.DisplayNameFor(model => model.Int2)
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Int3)
+            @if (item.Int3 != "")
+            {
+                @Html.DisplayNameFor(model => model.Int3)
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VarChar1)
+            @if (item.VarChar1 != "")
+            {
+                @Html.DisplayNameFor(model => model.VarChar1)
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VarChar2)
+            @if (item.VarChar1 != "")
+            {
+                @Html.DisplayNameFor(model => model.VarChar1)
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VarChar3)
+            @if (item.VarChar1 != "")
+            {
+                @Html.DisplayNameFor(model => model.VarChar1)
+            }
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DT1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DT2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DT3)
-        </th>
-        <th></th>
+            <th>
+                @if (item.DT1 != "")
+                {
+                    @Html.DisplayNameFor(model => model.DT1)
+                }
+            </th>
+            <th>
+                @if (item.DT1 != "")
+                {
+                    @Html.DisplayNameFor(model => model.DT1)
+                }
+            </th>
+            <th>
+                @if (item.DT1 != "")
+                {
+                    @Html.DisplayNameFor(model => model.DT1)
+                }
+            </th>
+            break;
+        }
+
     </tr>
 
 @foreach (var item in Model) {
