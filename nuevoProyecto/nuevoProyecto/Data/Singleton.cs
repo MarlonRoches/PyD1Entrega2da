@@ -156,7 +156,6 @@ namespace nuevoProyecto.Data
                 {
                     var aux = arrayDatos[i].Substring(1, arrayDatos[i].Length - 3);
                     arrayDatos[i] = aux;
-                    var Thor = arrayLlaves[i - 1];
 
                 }
             }
@@ -283,7 +282,6 @@ namespace nuevoProyecto.Data
         public void Input(string captura)
         {
             //listo
-
             string[] Arreglo = captura.Split(' ');
             string[] ArreglodeT = Arreglo;
             if (Arreglo.Length - 1 > 15)
@@ -331,10 +329,10 @@ namespace nuevoProyecto.Data
                         throw;
                     }
                 }// Drop Table   ------------------ LISTO -----------------------------
-                if (Concatenada == PalabrasCustom[6]) //Insert 
+                if (Concatenada == PalabrasCustom[6] || Palabra == PalabrasCustom[6]) //Insert 
                 {
                     string Key = ArreglodeT[2];//llave para el diccionario
-                    Global Nuevo = LlenarObjeto(ArreglodeT[3], ArreglodeT[5], Key);
+                    Global Nuevo = LlenarObjeto(ArreglodeT[3], ArreglodeT[ArreglodeT.Length-1], Key);
                     try
                     {
 
@@ -434,15 +432,61 @@ namespace nuevoProyecto.Data
                         }
                     }
 
-                }//Delete From <Tabla> Where Id//Aplicar delete del arbol PENDIENTE
-                for (int i = 0; i < ArreglodeT.Length - 1; i++)
+                }//Delete From 
+                if (Palabra == "Update")//Update
                 {
-                    if (ArreglodeT[i] == PalabrasCustom[8])
+                    string llave = ArreglodeT[1];
+                    string Nombre_Columna = ArreglodeT[3];
+                    string Valor = ArreglodeT[9];
+                    var Objeto = DiBPlus[llave];
+                    var lista = new List<Global>(Objeto);
+                    foreach (var item in lista)
                     {
-
-
+                        if (item.Id == Valor)
+                        {
+                            #region Condiciones
+                            if (Nombre_Columna == "Int1")
+                            {
+                                item.Int1 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "Int2")
+                            {
+                                item.Int2 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "Int3")
+                            {
+                                item.Int3 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "VarChar1")
+                            {
+                                item.VarChar1 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "VarChar2")
+                            {
+                                item.VarChar2 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "VarChar3")
+                            {
+                                item.VarChar3 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "DT1")
+                            {
+                                item.DT1 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "DT2")
+                            {
+                                item.DT2 = ArreglodeT[5];
+                            }
+                            if (Nombre_Columna == "DT3")
+                            {
+                                item.DT3 = ArreglodeT[5];
+                            }
+                            #endregion
+                        }
                     }
+
                 }
+
             }
         }
         #endregion
@@ -493,6 +537,7 @@ namespace nuevoProyecto.Data
             }
         }
         public void DataWhere(string tabla, string variables , string Valor)//campos*    recibe
+
         {
             int contador = 0;
             var Datos = variables.Split(' ');
@@ -616,6 +661,47 @@ namespace nuevoProyecto.Data
                 }
             }
             return false;
+        }
+
+
+
+        public void Like(string tabla, string variables, string Valor)//campos*    recibe
+
+        {
+            int contador = 0;
+            var Datos = variables.Split(' ');
+            var DatosEnvia = new string[Datos.Length];
+            foreach (var item in Datos)
+            {
+                var index = item.IndexOf(',');
+                if (item == "" || item == " ")
+                {
+                    break;
+                }
+                if (index != -1)
+                {
+                    DatosEnvia[contador] = item.Substring(0, index);
+                    contador++;
+                }
+                else
+                {
+                    DatosEnvia[contador] = item;
+                    contador++;
+                }
+            }
+            var x = Valor;
+            SelectLista = FiltrarCampos(tabla, DatosEnvia);
+            // filtrar lista
+            var aux = new List<Global>();
+            foreach (var item in SelectLista)
+            {
+                if (item.Id == Valor)
+                {
+                    aux.Add(item);
+                }
+            }
+
+            SelectLista = aux;
         }
         #endregion
     }
