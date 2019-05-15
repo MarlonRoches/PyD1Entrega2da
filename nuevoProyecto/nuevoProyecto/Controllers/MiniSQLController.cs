@@ -109,8 +109,10 @@ namespace nuevoProyecto.Controllers
             Singleton.Instance.Palabras_Reservadas();
             //try
             //{
-                //Enviar a singletone
-                Singleton.Instance.Input(collection["Data"]);
+            //Enviar a singletone                
+                Singleton.Instance.GoFiltro(collection["Data"]);
+
+                //Singleton.Instance.Input(collection["Data"]);
                 return RedirectToAction("Consola");
             //}
             //catch

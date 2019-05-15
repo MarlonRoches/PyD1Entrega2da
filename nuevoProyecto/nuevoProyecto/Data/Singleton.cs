@@ -274,6 +274,18 @@ namespace nuevoProyecto.Data
 
         }
         #endregion
+        public void GoFiltro(string TextoBruto)
+        {
+            var GoSplited = TextoBruto.Replace("\r\n", "$").Split('$');
+            foreach (var item in GoSplited)
+            {
+                if (item.ToLower() != PalabrasCustom[8].ToLower())
+                {
+                    Input(item);
+                }
+
+            }
+        }
         public void Input(string captura)
         {
             //listo
