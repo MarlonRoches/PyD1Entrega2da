@@ -49,11 +49,12 @@ namespace nuevoProyecto.Data
         #region botar_Todo
         public void botarT(string llave)
         {
+
             var Objeto = DiBPlus[llave];
 
             if (DiBPlus.ContainsKey(llave))
             {
-                Objeto.RemoveAt(0);
+                Objeto.Clear();
             }
         }
         #endregion
@@ -409,21 +410,28 @@ namespace nuevoProyecto.Data
                         //throw;
                    // }
                 }// Select PENDIENTE
-                if (Concatenada == PalabrasCustom[2])
+
+                if (Concatenada.ToLower() == PalabrasCustom[2].ToLower())
                 {
                     string llave = ArreglodeT[2];
-                    if (DiBPlus.ContainsKey(llave))
+                    if (DiBPlus.ContainsKey(llave) && ArreglodeT.LongLength < 4)
                     {
                         botarT(llave);
-
                     }
-                    //if (DiBPlus.ContainsKey(llave) && Arreglo[3] == PalabrasCustom[3])
-                    //{
-                    //    //Global Elemento = Arreglo[4];
-                    //    //DiBPlus.FirstOrDefault(t => t.Key == llave).Value.RemoveAll("");
+                    else
+                    {
+                        if (DiBPlus.ContainsKey(llave) && Arreglo[3] == PalabrasCustom[3])
+                        {
 
-                    //}
-                    // Delete_From(arreglo[2], int.Parse(arreglo[arreglo.Length - 2]));
+                            int valor = int.Parse(ArreglodeT[6]);
+                            foreach (var item in DiBPlus)
+                            {
+                                var Objeto = DiBPlus[llave];
+                                Objeto.RemoveAt(valor - 1);
+
+                            }
+                        }
+                    }
 
                 }//Delete From <Tabla> Where Id//Aplicar delete del arbol PENDIENTE
                 for (int i = 0; i < ArreglodeT.Length -1; i++)
