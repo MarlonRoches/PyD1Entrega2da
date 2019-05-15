@@ -44,7 +44,6 @@ namespace nuevoProyecto.Data
        
         }
         #endregion
-
         #region Listo
         #region botar_Todo
         public void botarT(string llave)
@@ -268,12 +267,7 @@ namespace nuevoProyecto.Data
             }
         }
         #endregion
-        #region Segunda Instruccion
-        public void segunda( string[] Ncaptura)
-        {
-
-        }
-        #endregion
+        #region Main
         public void GoFiltro(string TextoBruto)
         {
             var GoSplited = TextoBruto.Replace("\r\n", "$").Split('$');
@@ -289,45 +283,40 @@ namespace nuevoProyecto.Data
         public void Input(string captura)
         {
             //listo
-            
+
             string[] Arreglo = captura.Split(' ');
             string[] ArreglodeT = Arreglo;
             if (Arreglo.Length - 1 > 15)
             {
 
-            for (int i = 0; i < Arreglo.Length -1; i++)
-            {
-                while (Arreglo[1] != PalabrasCustom[8])
+                for (int i = 0; i < Arreglo.Length - 1; i++)
                 {
-                    int n = 0;
-                    string S = Arreglo[n]+",";
-                    ArreglodeT = S.Split(',');
-                    n++;
-                }                
+                    while (Arreglo[1] != PalabrasCustom[8])
+                    {
+                        int n = 0;
+                        string S = Arreglo[n] + ",";
+                        ArreglodeT = S.Split(',');
+                        n++;
+                    }
 
-            } 
-            }            
-            if (ArreglodeT[ArreglodeT.Length - 1] == PalabrasCustom[8])
-            {
-            string[] SArreglo = captura.Split('\n');
-                segunda(SArreglo);
+                }
             }
             foreach (string Palabra in ArreglodeT)
             {
                 #region Listos             
-                 string Concatenada = Palabra + " " + ArreglodeT[1];
+                string Concatenada = Palabra + " " + ArreglodeT[1];
                 if (Concatenada == PalabrasCustom[4])// create Table
                 {
-                    
-                        var ubicacion1 = captura.IndexOf('(');
 
-                        captura = captura.Remove(0, ubicacion1 + 1);
-                        var ubicacion2 = captura.LastIndexOf(')');
-                        captura = captura.Substring(0, ubicacion2);
+                    var ubicacion1 = captura.IndexOf('(');
+
+                    captura = captura.Remove(0, ubicacion1 + 1);
+                    var ubicacion2 = captura.LastIndexOf(')');
+                    captura = captura.Substring(0, ubicacion2);
 
 
-                        Creat_Table(ArreglodeT[2], SplitCreate(captura));                   
-                    
+                    Creat_Table(ArreglodeT[2], SplitCreate(captura));
+
                 }// Creat Table  ------------------ LISTO -----------------------------
                 if (Concatenada == PalabrasCustom[5])
                 {
@@ -345,11 +334,11 @@ namespace nuevoProyecto.Data
                 if (Concatenada == PalabrasCustom[6]) //Insert 
                 {
                     string Key = ArreglodeT[2];//llave para el diccionario
-                     Global Nuevo = LlenarObjeto(ArreglodeT[3], ArreglodeT[5], Key);
+                    Global Nuevo = LlenarObjeto(ArreglodeT[3], ArreglodeT[5], Key);
                     try
                     {
-                        
-                       Insert_Into(Nuevo);
+
+                        Insert_Into(Nuevo);
 
                     }
                     catch (Exception)
@@ -362,32 +351,32 @@ namespace nuevoProyecto.Data
                 #endregion
                 if (Palabra == PalabrasCustom[0])
                 {
-                   // try
+                    // try
                     //{
-                        var split = ArreglodeT;
-                        switch (split[1])
-                        {
-                            case "*": // * PENIENTE
+                    var split = ArreglodeT;
+                    switch (split[1])
+                    {
+                        case "*": // * PENIENTE
 
-                                if (split[split.Length - 4] == PalabrasCustom[4] || split[split.Length - 4] == "WHERE" || split[split.Length - 4] == "Where")
-                                {
+                            if (split[split.Length - 4] == PalabrasCustom[4] || split[split.Length - 4] == "WHERE" || split[split.Length - 4] == "Where")
+                            {
                                 var Sinselect = captura.Split(' ');
                                 var tala = Sinselect[Sinselect.Length - 5];
                                 var vBuscar = Sinselect[Sinselect.Length - 3];
-                                var vValor = Sinselect[Sinselect.Length-1];
+                                var vValor = Sinselect[Sinselect.Length - 1];
 
-                                StarWhere(tala, vBuscar,vValor);
-                                }
-                                else
-                                {
+                                StarWhere(tala, vBuscar, vValor);
+                            }
+                            else
+                            {
 
-                                var Tabla = captura.Split(' ')[captura.Split(' ').Length-1];
+                                var Tabla = captura.Split(' ')[captura.Split(' ').Length - 1];
                                 Star(Tabla);
-                                }
-                                break;
-                            default: // CAMPO Where ...
-                                if (split[split.Length-4]==PalabrasCustom[4]|| split[split.Length - 4] == "WHERE" || split[split.Length - 4] == "Where")
-                                {//where
+                            }
+                            break;
+                        default: // CAMPO Where ...
+                            if (split[split.Length - 4] == PalabrasCustom[4] || split[split.Length - 4] == "WHERE" || split[split.Length - 4] == "Where")
+                            {//where
 
                                 #region Split
                                 var VarialesSelect = captura;
@@ -403,24 +392,24 @@ namespace nuevoProyecto.Data
 
                                 #endregion
 
-                                DataWhere(Tabla, VarialesSelect,Variable_Clave[Variable_Clave.Length-1]);
+                                DataWhere(Tabla, VarialesSelect, Variable_Clave[Variable_Clave.Length - 1]);
 
-                                }
-                                else//simple
-                                {
+                            }
+                            else//simple
+                            {
                                 var Sinselect = captura.Remove(0, captura.IndexOf(' ') + 1);
-                                var Variables = Sinselect.Substring(0,Sinselect.IndexOf(PalabrasCustom[1]));
+                                var Variables = Sinselect.Substring(0, Sinselect.IndexOf(PalabrasCustom[1]));
                                 var Tabla = Sinselect.Remove(0, Sinselect.IndexOf(PalabrasCustom[1])).Split(' ')[1];
-                                Data(Tabla,Variables);
-                                }
-                                break;
-                        }
-                   // }
+                                Data(Tabla, Variables);
+                            }
+                            break;
+                    }
+                    // }
                     //catch (Exception)
                     //{
 
-                        //throw;
-                   // }
+                    //throw;
+                    // }
                 }// Select PENDIENTE
 
                 if (Concatenada.ToLower() == PalabrasCustom[2].ToLower())
@@ -446,20 +435,15 @@ namespace nuevoProyecto.Data
                     }
 
                 }//Delete From <Tabla> Where Id//Aplicar delete del arbol PENDIENTE
-                for (int i = 0; i < ArreglodeT.Length -1; i++)
+                for (int i = 0; i < ArreglodeT.Length - 1; i++)
                 {
-                    if(ArreglodeT[i] == PalabrasCustom[8])
+                    if (ArreglodeT[i] == PalabrasCustom[8])
                     {
 
 
                     }
                 }
             }
-        }
-        #region Palabras Seguidas 
-        public void Palabra_Seguida()
-        {
-
         }
         #endregion
         #region SelectMetodos

@@ -80,7 +80,10 @@ namespace nuevoProyecto.Controllers
         }
 
 
-
+        public ActionResult Error()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult PalabrasReservadas(FormCollection collection)
         {
@@ -106,19 +109,15 @@ namespace nuevoProyecto.Controllers
         [HttpPost]
         public ActionResult Consola(FormCollection collection)
         {
-            Singleton.Instance.Palabras_Reservadas();
-            //try
-            //{
-            //Enviar a singletone                
+           try
+           {
                 Singleton.Instance.GoFiltro(collection["Data"]);
-
-                //Singleton.Instance.Input(collection["Data"]);
                 return RedirectToAction("Consola");
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            }
+            catch
+           {
+                return View("Error");
+           }
         }  // GET: MiniSQL/Create
         public ActionResult TreeView()
         {
