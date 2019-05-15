@@ -266,20 +266,46 @@ namespace nuevoProyecto.Data
                 throw new NotImplementedException();
             }
         }
+        #endregion
+        #region Segunda Instruccion
+        public void segunda( string[] Ncaptura)
+        {
 
+        }
         #endregion
         public void Input(string captura)
         {
-           //listo
+            //listo
+            
             string[] Arreglo = captura.Split(' ');
-            foreach (string Palabra in Arreglo)
+            string[] ArreglodeT = Arreglo;
+            if (Arreglo.Length - 1 > 15)
+            {
+
+            for (int i = 0; i < Arreglo.Length -1; i++)
+            {
+                while (Arreglo[1] != PalabrasCustom[8])
+                {
+                    int n = 0;
+                    string S = Arreglo[n]+",";
+                    ArreglodeT = S.Split(',');
+                    n++;
+                }                
+
+            } 
+            }            
+            if (ArreglodeT[ArreglodeT.Length - 1] == PalabrasCustom[8])
+            {
+            string[] SArreglo = captura.Split('\n');
+                segunda(SArreglo);
+            }
+            foreach (string Palabra in ArreglodeT)
             {
                 #region Listos             
-                 string Concatenada = Palabra + " " + Arreglo[1];
+                 string Concatenada = Palabra + " " + ArreglodeT[1];
                 if (Concatenada == PalabrasCustom[4])// create Table
                 {
-                    try
-                    {
+                    
                         var ubicacion1 = captura.IndexOf('(');
 
                         captura = captura.Remove(0, ubicacion1 + 1);
@@ -287,21 +313,15 @@ namespace nuevoProyecto.Data
                         captura = captura.Substring(0, ubicacion2);
 
 
-                        Creat_Table(Arreglo[2], SplitCreate(captura));
-
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
+                        Creat_Table(ArreglodeT[2], SplitCreate(captura));                   
+                    
                 }// Creat Table  ------------------ LISTO -----------------------------
                 if (Concatenada == PalabrasCustom[5])
                 {
                     try
                     {
-                        DiB.Remove(Arreglo[2]);
-                        DiBPlus.Remove(Arreglo[2]);
+                        DiB.Remove(ArreglodeT[2]);
+                        DiBPlus.Remove(ArreglodeT[2]);
                     }
                     catch (Exception)
                     {
@@ -311,8 +331,8 @@ namespace nuevoProyecto.Data
                 }// Drop Table   ------------------ LISTO -----------------------------
                 if (Concatenada == PalabrasCustom[6]) //Insert 
                 {
-                    string Key = Arreglo[2];//llave para el diccionario
-                     Global Nuevo = LlenarObjeto(Arreglo[3], Arreglo[5], Key);
+                    string Key = ArreglodeT[2];//llave para el diccionario
+                     Global Nuevo = LlenarObjeto(ArreglodeT[3], ArreglodeT[5], Key);
                     try
                     {
                         
@@ -331,7 +351,7 @@ namespace nuevoProyecto.Data
                 {
                    // try
                     //{
-                        var split = Arreglo;
+                        var split = ArreglodeT;
                         switch (split[1])
                         {
                             case "*": // * PENIENTE
@@ -391,7 +411,7 @@ namespace nuevoProyecto.Data
                 }// Select PENDIENTE
                 if (Concatenada == PalabrasCustom[2])
                 {
-                    string llave = Arreglo[2];
+                    string llave = ArreglodeT[2];
                     if (DiBPlus.ContainsKey(llave))
                     {
                         botarT(llave);
@@ -406,10 +426,22 @@ namespace nuevoProyecto.Data
                     // Delete_From(arreglo[2], int.Parse(arreglo[arreglo.Length - 2]));
 
                 }//Delete From <Tabla> Where Id//Aplicar delete del arbol PENDIENTE
+                for (int i = 0; i < ArreglodeT.Length -1; i++)
+                {
+                    if(ArreglodeT[i] == PalabrasCustom[8])
+                    {
 
-                break;
+
+                    }
+                }
             }
         }
+        #region Palabras Seguidas 
+        public void Palabra_Seguida()
+        {
+
+        }
+        #endregion
         #region SelectMetodos
         public void Star(string tabla) //* LisTO
         {
