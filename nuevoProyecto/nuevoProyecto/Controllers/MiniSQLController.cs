@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using nuevoProyecto.Data;
 using nuevoProyecto.Models;
 using System.IO;
+using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace nuevoProyecto.Controllers
 {
@@ -23,9 +25,9 @@ namespace nuevoProyecto.Controllers
 
             Sw.WriteLine("\'Int1\',\'Int2\',\'Int3\',\'VarChar1\',\'VarChar2\',\'VarChar3\',\'DT1\',\'DT2\',\'DT3\'");
             Response.ClearContent();
-            Response.AddHeader("content-dispotion", "attatchmen;filename=Tabla <Nombre> Exportada");
+            var aux1 = "attatchmen;filename=Tabla " + Tabla + " exportada.csv";
+            Response.AddHeader("content-dispotion", aux1);
             Response.ContentType="text/csv";
-
             foreach (var Nodo in Singleton.Instance.DiBPlus[Tabla])
             {
                 Sw.WriteLine(string.Format("\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\',\'{6}\',\'{7}\',\'{8}\'",
@@ -43,18 +45,38 @@ namespace nuevoProyecto.Controllers
 
                     ));
             }
-
             Response.Write(Sw.ToString());
             Response.End();
-
-
-
         }
-
-
-        public ActionResult ExportarExcel(string Tabla)
+        
+        public void ExportarExcel(string Tabla)
         {
-            return View();
+            var grid = new GridView();
+            grid.DataSource = from Actual in Singleton.Instance.DiBPlus[Tabla]
+                              select new
+                              {
+                                  Int1= Actual.Int1,
+                                  Int2= Actual.Int2,
+                                  Int3 = Actual.Int3,
+                                  VarChar1 = Actual.VarChar1,
+                                  VarChar2 = Actual.VarChar2,
+                                  VarChar3 = Actual.VarChar3,
+                                  DT1 = Actual.DT1,
+                                  DT2 = Actual.DT2,
+                                  DT3 = Actual.DT3,
+                              };
+
+            grid.DataBind();
+            Response.ClearContent();
+            var aux1 = "attatchmen;filename=Tabla " + Tabla + " exportada.xls";
+            Response.AddHeader("content-dispotion", aux1);
+            Response.ContentType = "application/excel";
+            var sw = new StringWriter();
+            var HTW= new HtmlTextWriter(sw);
+
+            grid.RenderControl(HTW);
+            Response.Write(sw.ToString());
+            Response.End();
         }
 
 
