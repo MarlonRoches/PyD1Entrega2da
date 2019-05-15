@@ -16,6 +16,49 @@ namespace nuevoProyecto.Controllers
         {
             return View();
         }
+
+        public void ExportarCSV(string Tabla)
+        {
+            var Sw = new StringWriter();
+
+            Sw.WriteLine("\'Int1\',\'Int2\',\'Int3\',\'VarChar1\',\'VarChar2\',\'VarChar3\',\'DT1\',\'DT2\',\'DT3\'");
+            Response.ClearContent();
+            Response.AddHeader("content-dispotion", "attatchmen;filename=Tabla <Nombre> Exportada");
+            Response.ContentType="text/csv";
+
+            foreach (var Nodo in Singleton.Instance.DiBPlus[Tabla])
+            {
+                Sw.WriteLine(string.Format("\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\',\'{6}\',\'{7}\',\'{8}\'",
+                    Nodo.Int1,
+                    Nodo.Int2,
+                    Nodo.Int3,
+
+                    Nodo.VarChar1,
+                    Nodo.VarChar1,
+                    Nodo.VarChar1,
+
+                    Nodo.DT1,
+                    Nodo.DT1,
+                    Nodo.DT1
+
+                    ));
+            }
+
+            Response.Write(Sw.ToString());
+            Response.End();
+
+
+
+        }
+
+
+        public ActionResult ExportarExcel(string Tabla)
+        {
+            return View();
+        }
+
+
+
         [HttpPost]
         public ActionResult PalabrasReservadas(FormCollection collection)
         {

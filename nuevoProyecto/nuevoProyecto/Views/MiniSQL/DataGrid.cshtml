@@ -13,7 +13,7 @@
             <th>
                 @if (item.Int1 != "")
                 {
-                    @Html.DisplayNameFor(model => model.Variables[model.Int1])
+                    @Html.DisplayNameFor(model => model.Int1)
                 }
             </th>
             <th>
@@ -103,7 +103,10 @@
         <td>
             @Html.ActionLink("VerTabla", "DataGrid", new { llave = item.Tabla })
         </td>
+        <td>
+            @Html.ActionLink("Exportar a CSV", "ExportarCSV", new { Tabla = item.Tabla});
+        </td>
     </tr>
     }
-
+   
 </table>
