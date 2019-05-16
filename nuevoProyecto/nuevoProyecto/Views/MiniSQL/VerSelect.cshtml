@@ -34,15 +34,15 @@
             }
         </th>
         <th>
-            @if (item.VarChar1 != "")
+            @if (item.VarChar2!= "")
             {
-                @Html.DisplayNameFor(model => model.VarChar1)
+                @Html.DisplayNameFor(model => model.VarChar2)
             }
         </th>
         <th>
-            @if (item.VarChar1 != "")
+            @if (item.VarChar3!= "")
             {
-                @Html.DisplayNameFor(model => model.VarChar1)
+                @Html.DisplayNameFor(model => model.VarChar3)
             }
         </th>
             <th>
@@ -52,15 +52,15 @@
                 }
             </th>
             <th>
-                @if (item.DT1 != "")
+                @if (item.DT2 != "")
                 {
-                    @Html.DisplayNameFor(model => model.DT1)
+                    @Html.DisplayNameFor(model => model.DT2)
                 }
             </th>
             <th>
-                @if (item.DT1 != "")
+                @if (item.DT3 != "")
                 {
-                    @Html.DisplayNameFor(model => model.DT1)
+                    @Html.DisplayNameFor(model => model.DT3)
                 }
             </th>
             break;
@@ -114,19 +114,19 @@
             }
         </td>
         <td>
-            @if (item.DT1 != "")
+            @if (item.DT2 != "")
             {
-                @Html.DisplayFor(modelItem => item.DT1)
+                @Html.DisplayFor(modelItem => item.DT2)
             }
         </td>
         <td>
-            @if (item.DT1 != "")
+            @if (item.DT3 != "")
             {
-                @Html.DisplayFor(modelItem => item.DT1)
+                @Html.DisplayFor(modelItem => item.DT3)
             }
         </td>
         <td>
-            @Html.ActionLink("ver Capos Correspondientes (PENDIENTE SANTIAGO)", "", new { id=item.Id }) |
+            @Html.ActionLink("ver Capos Correspondientes", "", new { id=item.Id }) |
       
             @Html.ActionLink("Exportar a CSV", "ExportarCSV", new { Tabla = item.Tabla }) |
             @Html.ActionLink("Exportar a XLS", "ExportarExcel", new { Tabla = item.Tabla })

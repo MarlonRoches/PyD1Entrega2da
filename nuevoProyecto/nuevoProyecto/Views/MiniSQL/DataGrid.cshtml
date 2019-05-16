@@ -35,21 +35,15 @@
                 }
             </th>
             <th>
-                @if (item.VarChar1 != "")
+                @if (item.VarChar2 != "")
                 {
-                    @Html.DisplayNameFor(model => model.VarChar1)
+                    @Html.DisplayNameFor(model => model.VarChar2)
                 }
             </th>
-            <th>
-                @if (item.VarChar1 != "")
+            <th
+                @if (item.VarChar3 != "")
                 {
-                    @Html.DisplayNameFor(model => model.VarChar1)
-                }
-            </th>
-            <th>
-                @if (item.DT1 != "")
-                {
-                    @Html.DisplayNameFor(model => model.DT1)
+                    @Html.DisplayNameFor(model => model.VarChar3)
                 }
             </th>
             <th>
@@ -59,9 +53,15 @@
                 }
             </th>
             <th>
-                @if (item.DT1 != "")
+                @if (item.DT2 != "")
                 {
-                    @Html.DisplayNameFor(model => model.DT1)
+                    @Html.DisplayNameFor(model => model.DT2)
+                }
+            </th>
+            <th>
+                @if (item.DT3 != "")
+                {
+                    @Html.DisplayNameFor(model => model.DT3)
                 }
             </th>
             break;

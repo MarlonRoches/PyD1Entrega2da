@@ -24,7 +24,7 @@ namespace nuevoProyecto.Controllers
             Sw.WriteLine("\'Int1\',\'Int2\',\'Int3\',\'VarChar1\',\'VarChar2\',\'VarChar3\',\'DT1\',\'DT2\',\'DT3\'");
             Response.ClearContent();
             Response.AddHeader("content-dispotion", "attatchmen;filename=Tabla_Exportada.csv");
-            Response.ContentType= "Application/CSV";
+            Response.ContentType= "application/xmlx";
             foreach (var Nodo in Singleton.Instance.DiBPlus[Tabla])
             {
                 Sw.WriteLine(string.Format("\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\',\'{6}\',\'{7}\',\'{8}\'",
@@ -64,8 +64,8 @@ namespace nuevoProyecto.Controllers
 
             grid.DataBind();
             Response.ClearContent();
-            Response.AddHeader("content-dispotion", "attatchmen;filename=Tabla_Exportada.xlsx"+ ".xlsx");
-            Response.ContentType = "Application/Excel";
+            Response.AddHeader("Content-Dispotion", "attachment; filename = Tabla_Exportada.xlsx");
+            Response.ContentType = "application/xmlx";
             var sw = new StringWriter();
             var HTW= new HtmlTextWriter(sw);
 
@@ -197,7 +197,7 @@ namespace nuevoProyecto.Controllers
                 }
                 else
                 {
-                    Singleton.Instance.PalabrasCustom[4] = collection["Create"];
+                    Singleton.Instance.PalabrasCustom[4] = collection["CreateTable"];
                 }
                 if (collection["DropTable"] == "" || collection["DropTable"] == null)
                 {

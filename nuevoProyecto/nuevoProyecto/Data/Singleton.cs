@@ -415,7 +415,7 @@ namespace nuevoProyecto.Data
                     {
                         case "*": // * PENIENTE
 
-                            if (split[split.Length - 4] == PalabrasCustom[4] || split[split.Length - 4] == "WHERE" || split[split.Length - 4] == "Where")
+                            if (split[split.Length - 4].ToLower() == PalabrasCustom[4].ToLower() || split[split.Length - 4].ToUpper() == "WHERE" || split[split.Length - 4] == "Where")
                             {
                                 var Sinselect = captura.Split(' ');
                                 var tala = Sinselect[Sinselect.Length - 5];
@@ -535,6 +535,7 @@ namespace nuevoProyecto.Data
                     aux.Add(item);
                 }
             }
+            SelectLista = aux;
         }
         public void DataWhere(string tabla, string variables, string Valor)//campos*    recibe
 

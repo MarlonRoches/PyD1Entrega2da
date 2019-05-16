@@ -1,0 +1,9 @@
+Select,WÄHLEN
+From,VON
+Delete From,LÖSCHEN VON
+Where,WOHER
+Create Table,TABELLE ERSTELLEN
+Drop Table,TROPFENTABELLE
+Insert Into,EINFÜGEN IN
+Value,WERT
+Go,GEHEN
