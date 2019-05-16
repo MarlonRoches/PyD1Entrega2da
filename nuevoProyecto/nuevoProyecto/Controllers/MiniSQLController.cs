@@ -98,9 +98,18 @@ namespace nuevoProyecto.Controllers
         [HttpPost]
         public ActionResult Consola(FormCollection collection)
         {
-            
+
+            try
+            {
                 Singleton.Instance.GoFiltro(collection["Data"]);
                 return RedirectToAction("Consola");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Error");
+                
+            }
            
         }  // GET: MiniSQL/Create
         public ActionResult TreeView()
