@@ -41,7 +41,7 @@ namespace nuevoProyecto.Data
             PalabrasReservadas[6] = "Insert Into";
             PalabrasReservadas[7] = "Value";
             PalabrasReservadas[8] = "Go";
-       
+
         }
         #endregion
         #region Listo
@@ -97,7 +97,7 @@ namespace nuevoProyecto.Data
             var Diccionario = new Dictionary<string, string>();
             //separar en dos vectores
             var auxvector = Texto.Split(',');
-            for (int i = 0; i < auxvector.Length ; i++)
+            for (int i = 0; i < auxvector.Length; i++)
             {
                 var AuxSpEspacio = auxvector[i].Split(' ');
                 Diccionario.Add(AuxSpEspacio[0], AuxSpEspacio[1]);
@@ -142,19 +142,20 @@ namespace nuevoProyecto.Data
         }
         internal Global LlenarObjeto(string Variables, string Valores, string Tabla)
         {
-            var Objeto = new Global(); 
+            var Objeto = new Global();
             //split-------------------------------------------------------
             #region Split
-            Variables = Variables.Substring(1, Variables.Length - 1);
-            var arrayLlaves = Variables.Split(','); var ULTIMAPOS = arrayLlaves[arrayLlaves.Length - 1].Substring(0, arrayLlaves[arrayLlaves.Length - 1].Length - 1);
+            Variables = Variables.Substring(1, Variables.Length - 2);
+            var arrayLlaves = Variables.Split(',');
+            var ULTIMAPOS = arrayLlaves[arrayLlaves.Length - 1].Substring(0, arrayLlaves[arrayLlaves.Length - 1].Length);
             arrayLlaves[arrayLlaves.Length - 1] = ULTIMAPOS;
-            Valores = Valores.Substring(1, Valores.Length - 1);
+            Valores = Valores.Substring(1, Valores.Length - 2);
             var arrayDatos = Valores.Split(',');
             for (int i = 0; i < arrayDatos.Length - 1; i++)
             {
                 if (arrayDatos[i].Substring(0, 1) == "'")
                 {
-                    var aux = arrayDatos[i].Substring(1, arrayDatos[i].Length - 3);
+                    var aux = arrayDatos[i].Substring(1, arrayDatos[i].Length - 2);
                     arrayDatos[i] = aux;
 
                 }
@@ -283,26 +284,12 @@ namespace nuevoProyecto.Data
         {
             //listo
             string[] Arreglo = captura.Split(' ');
-            string[] ArreglodeT = Arreglo;
-            if (Arreglo.Length - 1 > 15)
-            {
-
-                for (int i = 0; i < Arreglo.Length - 1; i++)
-                {
-                    while (Arreglo[1] != PalabrasCustom[8])
-                    {
-                        int n = 0;
-                        string S = Arreglo[n] + ",";
-                        ArreglodeT = S.Split(',');
-                        n++;
-                    }
-
-                }
-            }
-            foreach (string Palabra in ArreglodeT)
+            
+            
+            foreach (string Palabra in Arreglo)
             {
                 #region PalabrasReservadas             
-                string Concatenada = Palabra + " " + ArreglodeT[1];
+                string Concatenada = Palabra + " " + Arreglo[1];
                 if (Concatenada.ToLower() == PalabrasCustom[4].ToLower() || Palabra.ToLower() == PalabrasCustom[4].ToLower())// create Table
                 {
 
@@ -313,51 +300,49 @@ namespace nuevoProyecto.Data
                     captura = captura.Substring(0, ubicacion2);
 
 
-                    Creat_Table(ArreglodeT[2], SplitCreate(captura));
+                    Creat_Table(Arreglo[2], SplitCreate(captura));
 
                 }// Creat Table  ------------------ LISTO -----------------------------
-                if (Concatenada.ToLower() == PalabrasCustom[5] || Palabra.ToLower() == PalabrasCustom[5].ToLower())
+                if (Concatenada.ToUpper() == PalabrasCustom[5].ToUpper() || Palabra.ToLower() == PalabrasCustom[5].ToLower())
                 {
-                    try
-                    {
-                        DiB.Remove(ArreglodeT[2]);
-                        DiBPlus.Remove(ArreglodeT[2]);
-                    }
-                    catch (Exception)
-                    {
 
-                        throw;
-                    }
+
+                    DiB.Remove(Arreglo[2]);
+                    DiBPlus.Remove(Arreglo[2]);
+
                 }// Drop Table   ------------------ LISTO -----------------------------
                 if (Concatenada.ToLower() == PalabrasCustom[6].ToLower() || Palabra.ToLower() == PalabrasCustom[6].ToLower()) //Insert 
                 {
-                    string Key = ArreglodeT[2];//llave para el diccionario
-                    Global Nuevo = LlenarObjeto(ArreglodeT[3], ArreglodeT[ArreglodeT.Length-1], Key);
-                    try
-                    {
 
-                        Insert_Into(Nuevo);
+                    var index = captura.IndexOf('(');
+                    string sinpalabraReservada = captura;
+                    sinpalabraReservada = sinpalabraReservada.Remove(0, index);
+                    index = sinpalabraReservada.IndexOf(Arreglo[4]);
+                    var variables = sinpalabraReservada.Substring(0, index - 1);
+                    sinpalabraReservada = sinpalabraReservada.Remove(0, index + 7);
+                    //Global Nuevo = LlenarObjeto(Arreglo[3], Arreglo[Arreglo.Length - 1], Key);
+                    Global nuevo2 = LlenarObjeto(variables,sinpalabraReservada,Arreglo[2]);
 
-                    }
-                    catch (Exception)
-                    {
 
-                        throw;
-                    }
+
+                    Insert_Into(nuevo2);
+
+
+
                 } //Insert Into  ------------------ LISTO -----------------------------
-                if (Concatenada.ToLower() == PalabrasCustom[2].ToLower())
+                if (Concatenada.ToUpper() == PalabrasCustom[2].ToUpper())
                 {
-                    string llave = ArreglodeT[2];
-                    if (DiBPlus.ContainsKey(llave) && ArreglodeT.LongLength < 4)
+                    string llave = Arreglo[2];
+                    if (DiBPlus.ContainsKey(llave) && Arreglo.LongLength < 4)
                     {
                         botarT(llave);
                     }
                     else
                     {
-                        if (DiBPlus.ContainsKey(llave) && Arreglo[3] == PalabrasCustom[3])
+                        if (Arreglo[3] == PalabrasCustom[3])
                         {
 
-                            int valor = int.Parse(ArreglodeT[6]);
+                            int valor = int.Parse(Arreglo[6]);
                             foreach (var item in DiBPlus)
                             {
                                 var Objeto = DiBPlus[llave];
@@ -370,9 +355,9 @@ namespace nuevoProyecto.Data
                 }//Delete From 
                 if (Palabra.ToLower() == "Update".ToLower())//Update
                 {
-                    string llave = ArreglodeT[1];
-                    string Nombre_Columna = ArreglodeT[3];
-                    string Valor = ArreglodeT[9];
+                    string llave = Arreglo[1];
+                    string Nombre_Columna = Arreglo[3];
+                    string Valor = Arreglo[9];
                     var Objeto = DiBPlus[llave];
                     var lista = new List<Global>(Objeto);
                     foreach (var item in lista)
@@ -382,39 +367,39 @@ namespace nuevoProyecto.Data
                             #region Condiciones
                             if (Nombre_Columna == "Int1")
                             {
-                                item.Int1 = ArreglodeT[5];
+                                item.Int1 = Arreglo[5];
                             }
                             if (Nombre_Columna == "Int2")
                             {
-                                item.Int2 = ArreglodeT[5];
+                                item.Int2 = Arreglo[5];
                             }
                             if (Nombre_Columna == "Int3")
                             {
-                                item.Int3 = ArreglodeT[5];
+                                item.Int3 = Arreglo[5];
                             }
                             if (Nombre_Columna == "VarChar1")
                             {
-                                item.VarChar1 = ArreglodeT[5];
+                                item.VarChar1 = Arreglo[5];
                             }
                             if (Nombre_Columna == "VarChar2")
                             {
-                                item.VarChar2 = ArreglodeT[5];
+                                item.VarChar2 = Arreglo[5];
                             }
                             if (Nombre_Columna == "VarChar3")
                             {
-                                item.VarChar3 = ArreglodeT[5];
+                                item.VarChar3 = Arreglo[5];
                             }
                             if (Nombre_Columna == "DT1")
                             {
-                                item.DT1 = ArreglodeT[5];
+                                item.DT1 = Arreglo[5];
                             }
                             if (Nombre_Columna == "DT2")
                             {
-                                item.DT2 = ArreglodeT[5];
+                                item.DT2 = Arreglo[5];
                             }
                             if (Nombre_Columna == "DT3")
                             {
-                                item.DT3 = ArreglodeT[5];
+                                item.DT3 = Arreglo[5];
                             }
                             #endregion
                         }
@@ -423,9 +408,9 @@ namespace nuevoProyecto.Data
                 }
                 if (Concatenada.ToLower() == PalabrasCustom[0].ToLower() || Palabra.ToLower() == PalabrasCustom[0].ToLower())
                 {
-                    // try
+
                     //{
-                    var split = ArreglodeT;
+                    var split = Arreglo;
                     switch (split[1])
                     {
                         case "*": // * PENIENTE
@@ -457,10 +442,10 @@ namespace nuevoProyecto.Data
                                 VarialesSelect = VarialesSelect.Substring(index1 + 1, index2 - 8);
                                 var wheredato = captura;
                                 var pos1 = (indexigual + PalabrasCustom[3].Length) + 1;
-                                var Variable_Clave = (wheredato.Remove(0, pos1+1)).Split(' ');///obtener despues del where
+                                var Variable_Clave = (wheredato.Remove(0, pos1 + 2)).Split(' ');///obtener despues del where
 
                                 var Tabla = (captura.Remove(0, (index2 + PalabrasCustom[1].Length + 1))).Split(' ')[0];
-                                Like(Tabla, VarialesSelect, Variable_Clave[0], Variable_Clave[Variable_Clave.Length - 1]);
+                                Like(Tabla, VarialesSelect, Variable_Clave[Variable_Clave.Length - 3], Variable_Clave[Variable_Clave.Length - 1]);
 
                             }
                             else if (split[split.Length - 4] == PalabrasCustom[4] || split[split.Length - 4] == "WHERE" || split[split.Length - 4] == "Where")
@@ -513,17 +498,17 @@ namespace nuevoProyecto.Data
         public void Data(string tabla, string variables)//campos    recibe
         {
 
-            var contador =0;
+            var contador = 0;
             var Datos = variables.Split(' ');
-            var DatosEnvia = new string[Datos.Length-1];
+            var DatosEnvia = new string[Datos.Length - 1];
             foreach (var item in Datos)
             {
                 var index = item.IndexOf(',');
-                if (item=="" || item == " ")
+                if (item == "" || item == " ")
                 {
                     break;
                 }
-                if (index  != -1)
+                if (index != -1)
                 {
                     DatosEnvia[contador] = item.Substring(0, index);
                     contador++;
@@ -534,7 +519,7 @@ namespace nuevoProyecto.Data
                     contador++;
                 }
             }
-            SelectLista= FiltrarCampos(tabla, DatosEnvia);
+            SelectLista = FiltrarCampos(tabla, DatosEnvia);
 
         }
         public void StarWhere(string tabla, string variables, string Valor)//*Where
@@ -551,12 +536,12 @@ namespace nuevoProyecto.Data
                 }
             }
         }
-        public void DataWhere(string tabla, string variables , string Valor)//campos*    recibe
+        public void DataWhere(string tabla, string variables, string Valor)//campos*    recibe
 
         {
             int contador = 0;
             var Datos = variables.Split(' ');
-            var DatosEnvia = new string[Datos.Length ];
+            var DatosEnvia = new string[Datos.Length];
             foreach (var item in Datos)
             {
                 var index = item.IndexOf(',');
@@ -581,7 +566,7 @@ namespace nuevoProyecto.Data
             var aux = new List<Global>();
             foreach (var item in SelectLista)
             {
-                if (item.Id== Valor)
+                if (item.Id == Valor)
                 {
                     aux.Add(item);
                 }
@@ -589,24 +574,24 @@ namespace nuevoProyecto.Data
 
             SelectLista = aux;
         }
-        public List<Global> FiltrarCampos(string Tabla, string [] Datos)
+        public List<Global> FiltrarCampos(string Tabla, string[] Datos)
         {
-           
-                var listasimple = new List<Global>();
-                var VariablesMolde = DiB[Tabla].Variables;
-                var ListraGet = DiBPlus[Tabla];
-                foreach (Global NodoActual in ListraGet) //para cada nodo
-                {
-                    var ObjetoDinamico = new Global();
+
+            var listasimple = new List<Global>();
+            var VariablesMolde = DiB[Tabla].Variables;
+            var ListraGet = DiBPlus[Tabla];
+            foreach (Global NodoActual in ListraGet) //para cada nodo
+            {
+                var ObjetoDinamico = new Global();
                 var NombresDeLasVariablesActivas = ObjetoDinamico.Nombre_Variable(VariablesMolde);
 
                 foreach (var CampoActual in NombresDeLasVariablesActivas)// para cada una de los valores de las variables utilizadas, asignar la key de 
                 {
-                    if (CampoActual.Value=="Int1" && ExisteEnVector(CampoActual.Key,Datos))
+                    if (CampoActual.Value == "Int1" && ExisteEnVector(CampoActual.Key, Datos))
                     {
                         ObjetoDinamico.Int1 = NodoActual.Int1;
                         ObjetoDinamico.Id = NodoActual.Id;
-                        
+
                     }
                     else if (CampoActual.Value == "Int2" && ExisteEnVector(CampoActual.Key, Datos))
                     {
@@ -650,14 +635,14 @@ namespace nuevoProyecto.Data
                     }
 
                 }
-                    ObjetoDinamico.Tabla = NodoActual.Tabla;
-                    listasimple.Add(ObjetoDinamico);
+                ObjetoDinamico.Tabla = NodoActual.Tabla;
+                listasimple.Add(ObjetoDinamico);
 
-                }
+            }
 
 
-                return listasimple;
-            
+            return listasimple;
+
         }
         public bool ExisteEnVector(string NombreVar, string[] Vector)
         {
@@ -668,11 +653,12 @@ namespace nuevoProyecto.Data
             else
             {
                 for (int i = 0; i <= Vector.Length - 1; i++)
-                { var aux = Vector[i];
+                {
+                    var aux = Vector[i];
 
                     if (NombreVar.ToLower() == aux.ToLower()) return true;
-                    
-                   
+
+
                 }
             }
             return false;
@@ -705,20 +691,45 @@ namespace nuevoProyecto.Data
             //// filtrar lista
             var aux = new List<Global>();
             ////cambiarFiltro
-            if (true)
+            var auxlike = Like.Remove(0, 1);
+            var indexDeCaracter = auxlike.IndexOf('%');
+            auxlike = auxlike.Substring(0, indexDeCaracter);
+            if (VariableAbucsar == "VarChar1")
             {
 
-            }   
-            //foreach (var item in SelectLista)
-            //{
-            //    if (item.Id == Valor)
-            //    {
-            //        aux.Add(item);
-            //    }
-            //}
+                foreach (var item in SelectLista)
+                {
+                    if (item.VarChar1.Contains(auxlike))
+                    {
+                        aux.Add(item);
+                    }
+                }
+            }
+            else if (VariableAbucsar == "VarChar2")
+            {
+                foreach (var item in SelectLista)
+                {
+                    if (item.VarChar2.Contains(auxlike))
+                    {
+                        aux.Add(item);
+                    }
+                }
+            }
+            else if (VariableAbucsar == "VarChar3")
+            {
+                foreach (var item in SelectLista)
+                {
+                    if (item.VarChar3.Contains(auxlike))
+                    {
+                        aux.Add(item);
+                    }
+                }
+            }
 
-            //SelectLista = aux;
+            SelectLista = aux;
         }
         #endregion
     }
 }
+
+   

@@ -126,11 +126,10 @@
             }
         </td>
         <td>
-            @Html.ActionLink("ver Capos Correspondientes (PENDIENTE SANTIAGO)", "", new { id=item.Id }) 
-        </td>
-        <td>
-            @Html.ActionLink("Exportar a CSV", "ExportarCSV", new { Tabla = item.Tabla });
-            @Html.ActionLink("Exportar a XLS", "ExportarExcel", new { Tabla = item.Tabla });
+            @Html.ActionLink("ver Capos Correspondientes (PENDIENTE SANTIAGO)", "", new { id=item.Id }) |
+      
+            @Html.ActionLink("Exportar a CSV", "ExportarCSV", new { Tabla = item.Tabla }) |
+            @Html.ActionLink("Exportar a XLS", "ExportarExcel", new { Tabla = item.Tabla })
         </td>
     </tr>
 }

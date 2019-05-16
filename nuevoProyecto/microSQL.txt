@@ -1,0 +1,9 @@
+Select,SELECT
+From,FROM
+Delete From,DELETE FROM
+Where,WHERE
+Create Table,CREATE TABLE
+Drop Table,DROP TABLE
+Insert Into,INSERT INTO
+Value,VALUE
+Go,GO

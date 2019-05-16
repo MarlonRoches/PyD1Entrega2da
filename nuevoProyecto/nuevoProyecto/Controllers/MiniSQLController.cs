@@ -13,21 +13,18 @@ namespace nuevoProyecto.Controllers
 {
     public class MiniSQLController : Controller
     {
-        // GET: MiniSQL
         public ActionResult PalabrasReservadas()
         {
             return View();
         }
-
         public void ExportarCSV(string Tabla)
         {
             var Sw = new StringWriter();
 
             Sw.WriteLine("\'Int1\',\'Int2\',\'Int3\',\'VarChar1\',\'VarChar2\',\'VarChar3\',\'DT1\',\'DT2\',\'DT3\'");
             Response.ClearContent();
-            var aux1 = "attatchmen;filename=Tabla " + Tabla + " exportada.csv";
-            Response.AddHeader("content-dispotion", aux1);
-            Response.ContentType="text/csv";
+            Response.AddHeader("content-dispotion", "attatchmen;filename=Tabla_Exportada.csv");
+            Response.ContentType= "Application/CSV";
             foreach (var Nodo in Singleton.Instance.DiBPlus[Tabla])
             {
                 Sw.WriteLine(string.Format("\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\',\'{6}\',\'{7}\',\'{8}\'",
@@ -48,7 +45,6 @@ namespace nuevoProyecto.Controllers
             Response.Write(Sw.ToString());
             Response.End();
         }
-        
         public void ExportarExcel(string Tabla)
         {
             var grid = new GridView();
@@ -68,9 +64,8 @@ namespace nuevoProyecto.Controllers
 
             grid.DataBind();
             Response.ClearContent();
-            var aux1 = "attatchmen;filename=Tabla " + Tabla + " exportada.xls";
-            Response.AddHeader("content-dispotion", aux1);
-            Response.ContentType = "application/excel";
+            Response.AddHeader("content-dispotion", "attatchmen;filename=Tabla_Exportada.xlsx"+ ".xlsx");
+            Response.ContentType = "Application/Excel";
             var sw = new StringWriter();
             var HTW= new HtmlTextWriter(sw);
 
@@ -78,8 +73,6 @@ namespace nuevoProyecto.Controllers
             Response.Write(sw.ToString());
             Response.End();
         }
-
-
         public ActionResult Error()
         {
             return View();
@@ -98,26 +91,17 @@ namespace nuevoProyecto.Controllers
                 return View();
             }
         }
-
-        // GET: MiniSQL/Create
         public ActionResult Consola()
         {
             return View();
         }
-
-        // POST: MiniSQL/Create
         [HttpPost]
         public ActionResult Consola(FormCollection collection)
         {
-           //try
-           //{
+            
                 Singleton.Instance.GoFiltro(collection["Data"]);
                 return RedirectToAction("Consola");
-            //}
-           // catch
-           //{
-           //     return View("Error");
-           //}
+           
         }  // GET: MiniSQL/Create
         public ActionResult TreeView()
         {
@@ -257,6 +241,5 @@ namespace nuevoProyecto.Controllers
                 return View();
             }
         }
-
     }
 }

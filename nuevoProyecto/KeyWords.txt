@@ -1,9 +1,0 @@
-Select,Select
-From,From
-Delete From,Delete From
-Where,Where
-Create Table,Create Table
-Drop Table,Drop Table
-Insert Into,Insert Into
-Value,Value
-Go,Go
